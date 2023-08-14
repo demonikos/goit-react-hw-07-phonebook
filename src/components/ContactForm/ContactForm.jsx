@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
-import { addContact } from 'redux/store';
+// import { addContact } from 'redux/store';
+import { addContact } from 'redux/operations';
+import { Notify } from 'notiflix';
 
 export const ContactForm = () => {
   const [state, setState] = useState({
     name: '',
-    number: '',
+    phone: '',
   });
 
   const dispatch = useDispatch();
@@ -15,16 +17,16 @@ export const ContactForm = () => {
   const contactRedux = useSelector(getContacts);
   const contacts = filterRedux === '' ? contactRedux : filteredNames();
 
-  const addNewContact = (id, name, number) => {
+  const addNewContact = (id, name, phone) => {
     if (
       !contacts.some(elem => elem.name.toLowerCase() === name.toLowerCase())
     ) {
-      dispatch(addContact({ id, name, number }));
+      dispatch(addContact({ id, name, phone }));
       setState(prevState => {
-        return { ...prevState, name: '', number: ''};
+        return { ...prevState, name: '', phone: ''};
       });
     } else {
-      alert(`${name} is already exist! Write another one!`);
+      Notify.info(`${name} is already exist! Write another one!`);
     }
   };
 
