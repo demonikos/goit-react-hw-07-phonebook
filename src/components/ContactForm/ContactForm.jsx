@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
-// import { addContact } from 'redux/store';
 import { addContact } from 'redux/operations';
 import { Notify } from 'notiflix';
 
@@ -23,7 +22,7 @@ export const ContactForm = () => {
     ) {
       dispatch(addContact({ id, name, phone }));
       setState(prevState => {
-        return { ...prevState, name: '', phone: ''};
+        return { ...prevState, name: '', phone: '' };
       });
     } else {
       Notify.info(`${name} is already exist! Write another one!`);

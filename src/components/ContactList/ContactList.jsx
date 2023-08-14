@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
-// import { deleteContact } from 'redux/store';
 import { fetchContacts, deleteContact } from 'redux/operations';
-
 
 export const ContactList = () => {
   const dispatch = useDispatch();
@@ -13,8 +11,8 @@ export const ContactList = () => {
   const contacts = filterRedux === '' ? contactRedux : filteredNames();
 
   useEffect(() => {
-    dispatch(fetchContacts())
-  }, [dispatch])
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   function filteredNames() {
     return contactRedux.filter(elem =>
